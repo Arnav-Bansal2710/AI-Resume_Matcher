@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Matcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>AI Resume Screening & Job Matching</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Upload Resume (PDF)</label>
+        <input type="file" name="resume" required>
+
+        <label>Paste Job Description</label>
+        <textarea name="job_desc" rows="6" required></textarea>
+
+        <button type="submit">Analyze Resume</button>
+    </form>
+
+    {% if score is not none %}
+    <div class="result">
+        <h2>Match Score: {{ score }}%</h2>
+
+        <h3>Missing Keywords:</h3>
+        <ul>
+            {% for word in missing_keywords %}
+            <li>{{ word }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
